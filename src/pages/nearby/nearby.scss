@@ -1,0 +1,17 @@
+page-nearby {
+
+  ion-grid {
+
+    ion-row {
+      flex-wrap: wrap;
+
+      ion-col {
+
+        .card {
+          overflow: hidden;
+          font-size: 0.9em;
+        }
+      }
+    }
+  }
+}

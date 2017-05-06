@@ -1,0 +1,14 @@
+page-login {
+
+  ion-list{
+    &.list-ios,
+    &.list-md {
+      margin-bottom: 0;
+    }
+
+    ion-item.item-block {
+      background: color($colors, gray);
+      margin-top: 2px;
+    }
+  }
+}

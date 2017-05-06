@@ -1,0 +1,27 @@
+page-meet {
+  ion-grid {
+
+    ion-row {
+      flex-wrap: wrap;
+
+      ion-col {
+        position: relative;
+
+        .card {
+          font-size: 0.9em;
+
+          .note {
+            padding: 5px 0 10px;
+          }
+        }
+
+        .datetime {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          background: rgba(0, 0, 0, 0.4);
+        }
+      }
+    }
+  }
+}

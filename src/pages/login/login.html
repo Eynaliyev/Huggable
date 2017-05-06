@@ -1,0 +1,36 @@
+<!--
+  Generated template for the ProfilePage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="white">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Log in with account</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div padding>Welcome Back</div>
+  <!-- Login form -->
+  <ion-list class="list-no-border" no-margin>
+    <ion-item>
+      <ion-input type="text" placeholder="Username/Email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="password" placeholder="Password"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <!--button-->
+  <div padding>
+    <button ion-button block color="primary" (click)="goToHome()">Login</button>
+    <span class="pull-right">Forgot password?</span>
+  </div>
+</ion-content>

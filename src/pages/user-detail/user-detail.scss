@@ -1,0 +1,45 @@
+page-user-detail {
+
+  .scroll-content {
+    margin-top: 0 !important;
+
+    ion-slides {
+      height: auto;
+
+      .swiper-pagination {
+        top: 10px;
+
+        .swiper-pagination-bullet {
+          background: color($colors, white);
+        }
+      }
+    }
+
+    .action-btn {
+      position: absolute;
+      width: 100%;
+      bottom: 16px;
+      z-index: 100;
+
+      button {
+        border-radius: 50%;
+        width: 2.8em;
+        height: 2.8em;
+        font-size: 1.6em;
+      }
+    }
+  }
+
+  .profile {
+
+    &>div {
+      margin-top: 5px;
+
+      .label {
+        display: inline-block;
+        width: 40%;
+        color: color($colors, dark);
+      }
+    }
+  }
+}

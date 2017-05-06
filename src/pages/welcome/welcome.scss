@@ -1,0 +1,62 @@
+page-welcome {
+
+  ion-content {
+    background-size: 100% 100%;
+    
+    h1 { 
+      text-align:center;
+      font-size: 44px;
+      font-color: "#4EADC5";
+      border: 1px;
+      text-shadow: -1px 0 1px white, 0 1px 1px white, 1px 0 1px white, 0 -1px 1px white
+    }
+    
+    .background {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+        transform: translateX(-50%) translateY(-50%);
+        background: url('../assets/img/hug.png') no-repeat;
+        background-size: cover;
+        transition: 1s opacity;
+    }
+
+    video { 
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+        transform: translateX(-50%) translateY(-50%);
+        background: url('assets/img/hug.png') no-repeat;
+        background-size: cover;
+        transition: 1s opacity;
+    }
+
+    .stopfade { 
+       opacity: .5;
+    }
+
+    .logo {
+      margin-top: 5em;
+      height: 200px;
+      width: 200px;
+      margin: 0 auto; 
+
+      .logo-bg {
+        display: inline-block;
+        font-size: 4em;
+        padding: 0.4em 0.47em 0.2em 0.47em;
+        border-radius: 10%;
+      }
+    }
+  }
+}
