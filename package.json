@@ -1,7 +1,7 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "Huggable",
+  "author": "Rustam Eynaliyev",
+  "homepage": "http://huggableapp.com/",
   "private": true,
   "scripts": {
     "ionic:build": "ionic-app-scripts build",
@@ -18,6 +18,8 @@
     "@angular/platform-browser": "4.0.2",
     "@angular/platform-browser-dynamic": "4.0.2",
     "@angular/platform-server": "4.0.2",
+    "@ionic-native/camera": "^3.6.1",
+    "@ionic-native/core": "^3.6.1",
     "@ionic/storage": "2.0.1",
     "angular2-swing": "^0.10.0",
     "firebase": "^3.9.0",

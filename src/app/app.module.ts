@@ -3,6 +3,8 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { SwingModule } from 'angular2-swing';
+import { Camera } from '@ionic-native/camera';
+import firebase from 'firebase';
 
 // import services
 import {UserService} from '../services/user-service';
@@ -30,6 +32,14 @@ import {DatePage} from '../pages/date/date';
 import {ContactsPage} from '../pages/contacts/contacts';
 import {SettingPage} from '../pages/setting/setting';
 // end import pages
+
+class CameraMock extends Camera {
+  getPicture(options){
+    return new Promise( (resolve, reject) => {
+      resolve(`TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlzIHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2YgdGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGludWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRoZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=`);
+    });
+  }
+}
 
 @NgModule({
   declarations: [
@@ -95,6 +105,7 @@ import {SettingPage} from '../pages/setting/setting';
     PostService,
     DateService,
     NotificationService,
+    Camera
     /* import services */
   ]
 })
