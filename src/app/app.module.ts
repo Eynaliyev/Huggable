@@ -4,7 +4,6 @@ import { MyApp } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { SwingModule } from 'angular2-swing';
 import { Camera } from '@ionic-native/camera';
-import firebase from 'firebase';
 
 // import services
 import {UserService} from '../services/user-service';

@@ -22,4 +22,7 @@ export class WelcomePage {
   goToHome() {
     this.nav.setRoot(MainTabsPage);
   }
+  login(){
+    console.log('login pressed');
+  }
 }
