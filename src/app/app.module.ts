@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SwingModule } from 'angular2-swing';
 import { Camera } from '@ionic-native/camera';
 import { HttpModule } from '@angular/http';
+import { Facebook } from '@ionic-native/facebook';
 
 // import services
 import {AuthProvider} from '../providers/auth-provider';
@@ -109,7 +110,8 @@ class CameraMock extends Camera {
     DateService,
     NotificationService,
     Camera,
-    AuthProvider
+    AuthProvider,
+    Facebook
     /* import services */
   ]
 })
