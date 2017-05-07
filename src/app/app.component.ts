@@ -3,7 +3,7 @@ import {Platform} from 'ionic-angular';
 import {ViewChild} from '@angular/core';
 import {StatusBar} from 'ionic-native';
 import {AuthProvider} from '../providers/auth-provider';
-
+import firebase from 'firebase';
 // import pages
 import {MainTabsPage} from '../pages/main-tabs/main-tabs';
 import {WelcomePage} from '../pages/welcome/welcome';
@@ -51,8 +51,27 @@ export class MyApp {
   constructor(public platform: Platform,
     public authProvider: AuthProvider) {
     console.log('inside app component');
+    this.zone = new NgZone({});
     this.rootPage = WelcomePage;
-
+    firebase.initializeApp({
+      apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
+      authDomain: "huggable-9e981.firebaseapp.com",
+      databaseURL: "https://huggable-9e981.firebaseio.com",
+      projectId: "huggable-9e981",
+      storageBucket: "huggable-9e981.appspot.com",
+      messagingSenderId: "272489685620"
+    });
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      this.zone.run( () => {
+        if (!user) {
+          this.rootPage = WelcomePage;
+          unsubscribe();
+        } else { 
+          this.rootPage = MainTabsPage;
+          unsubscribe();
+        }
+      });     
+    });
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
