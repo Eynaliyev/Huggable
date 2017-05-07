@@ -6,7 +6,6 @@ import {StatusBar} from 'ionic-native';
 // import pages
 import {MainTabsPage} from '../pages/main-tabs/main-tabs';
 import {WelcomePage} from '../pages/welcome/welcome';
-import {LoginPage} from '../pages/login/login';
 import {ContactsPage} from '../pages/contacts/contacts';
 import {SettingPage} from '../pages/setting/setting';
 // end import pages
@@ -43,13 +42,6 @@ export class MyApp {
       icon: 'ios-home-outline',
       count: 0,
       component: SettingPage
-    },
-
-    {
-      title: 'Logout',
-      icon: 'ios-home-outline',
-      count: 0,
-      component: LoginPage
     },
     // import menu
   ];
