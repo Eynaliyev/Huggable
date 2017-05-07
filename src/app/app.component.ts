@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import {Platform} from 'ionic-angular';
 import {ViewChild} from '@angular/core';
 import {StatusBar} from 'ionic-native';
+import {AuthProvider} from '../providers/auth-provider';
 
 // import pages
 import {MainTabsPage} from '../pages/main-tabs/main-tabs';
@@ -19,6 +20,7 @@ import {SettingPage} from '../pages/setting/setting';
 export class MyApp {
 
   public rootPage: any;
+  zone:NgZone;
 
   public nav: any;
 
