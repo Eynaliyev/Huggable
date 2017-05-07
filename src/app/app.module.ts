@@ -4,8 +4,10 @@ import { MyApp } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { SwingModule } from 'angular2-swing';
 import { Camera } from '@ionic-native/camera';
+import { HttpModule } from '@angular/http';
 
 // import services
+import {AuthProvider} from '../providers/auth-provider';
 import {UserService} from '../services/user-service';
 import {ChatService} from '../services/chat-service';
 import {PostService} from '../services/post-service';
@@ -62,6 +64,7 @@ class CameraMock extends Camera {
     /* import pages */
   ],
   imports: [
+    HttpModule,
     IonicModule.forRoot(MyApp, {
         platforms: {
           android: {
@@ -75,7 +78,8 @@ class CameraMock extends Camera {
         }
       }
     ),
-    BrowserModule, SwingModule
+    BrowserModule, 
+    SwingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -104,7 +108,8 @@ class CameraMock extends Camera {
     PostService,
     DateService,
     NotificationService,
-    Camera
+    Camera,
+    AuthProvider
     /* import services */
   ]
 })

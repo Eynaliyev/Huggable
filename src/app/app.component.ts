@@ -48,7 +48,9 @@ export class MyApp {
     // import menu
   ];
 
-  constructor(public platform: Platform) {
+  constructor(public platform: Platform,
+    public authProvider: AuthProvider) {
+    console.log('inside app component');
     this.rootPage = WelcomePage;
 
     platform.ready().then(() => {
