@@ -18,20 +18,15 @@ import {NotificationService} from '../services/notification-service';
 
 // import pages
 import {MainTabsPage} from '../pages/main-tabs/main-tabs';
-import {NearbyPage} from '../pages/nearby/nearby';
 import {WelcomePage} from '../pages/welcome/welcome';
-import {LoginPage} from '../pages/login/login';
 import {MatchPage} from '../pages/match/match';
 import {MessagesPage} from '../pages/messages/messages';
 import {MeetPage} from '../pages/meet/meet';
-import {WallPage} from '../pages/wall/wall';
 import {FilterPage} from '../pages/filter/filter';
 import {NotificationsPage} from '../pages/notifications/notifications';
 import {UserDetailPage} from '../pages/user-detail/user-detail';
 import {ChatDetailPage} from '../pages/chat-detail/chat-detail';
-import {PostPage} from '../pages/post/post';
 import {DatePage} from '../pages/date/date';
-import {ContactsPage} from '../pages/contacts/contacts';
 import {SettingPage} from '../pages/setting/setting';
 // end import pages
 
@@ -47,20 +42,15 @@ class CameraMock extends Camera {
   declarations: [
     MyApp,
     MainTabsPage,
-    NearbyPage,
     WelcomePage,
-    LoginPage,
     MatchPage,
     MessagesPage,
     MeetPage,
-    WallPage,
     FilterPage,
     NotificationsPage,
     UserDetailPage,
     ChatDetailPage,
-    PostPage,
     DatePage,
-    ContactsPage,
     SettingPage,
     /* import pages */
   ],
@@ -86,20 +76,15 @@ class CameraMock extends Camera {
   entryComponents: [
     MyApp,
     MainTabsPage,
-    NearbyPage,
     WelcomePage,
-    LoginPage,
     MatchPage,
     MessagesPage,
     MeetPage,
-    WallPage,
     FilterPage,
     NotificationsPage,
     UserDetailPage,
     ChatDetailPage,
-    PostPage,
     DatePage,
-    ContactsPage,
     SettingPage,
     /* import pages */
   ],
