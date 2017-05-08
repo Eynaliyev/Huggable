@@ -8,6 +8,11 @@ export class UserService {
   constructor() {
     this.users = USERS;
   }
+  // get current user's UID
+  // Get Info of a Single User
+  // Get All users of our app - to be changed later to get relevant users
+  // get base64 Picture of User - to be changed to get from storage later
+  // Update Profile Picture of the user
 
   getAll() {
     return this.users;

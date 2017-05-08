@@ -8,6 +8,9 @@ export class ChatService {
   constructor() {
     this.chats = CHATS;
   }
+  // get list of Chats of the current user
+  // add chat references to both users
+  // get chat reference
 
   getAll() {
     return this.chats;
