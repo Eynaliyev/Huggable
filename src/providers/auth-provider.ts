@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook';
+import {UserService} from '../services/user-service';
 /*
   Generated class for the AuthProvider provider.
 
@@ -13,7 +14,8 @@ import { Facebook } from '@ionic-native/facebook';
 export class AuthProvider {
 
   constructor(public http: Http,
-  	private facebook: Facebook) {
+  	private facebook: Facebook,
+  	public userService: UserService) {
     console.log('Hello AuthProvider Provider');
   }
 	facebookLogin(): firebase.Promise<any> {
@@ -24,7 +26,8 @@ export class AuthProvider {
 			return firebase.auth().signInWithCredential(facebookCredential)
 			.then((success) => {
 				console.log("Firebase success: " + JSON.stringify(success));
-				console.log('current user.providerData: ', firebase.auth().currentUser.providerData);
+				console.log('current user.providerData: ', firebase.auth().currentUser.providerData[0]);
+				this.userService.setCurrentUser();
 				/* creating a user profile - for user profile purposes?
 				firebase.database().ref('/userProfile').child(success.uid)
 				.set({ email: email });
