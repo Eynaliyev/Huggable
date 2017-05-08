@@ -21,7 +21,7 @@ export class WelcomePage {
     public authProvider: AuthProvider) {
     // disable menu
       this.menu.swipeEnable(false);
-      console.log('inside welcome page');
+      //console.log('inside welcome page');
     }
   // go to home page
   goToHome() {

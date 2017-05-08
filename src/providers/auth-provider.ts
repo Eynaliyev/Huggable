@@ -24,6 +24,7 @@ export class AuthProvider {
 			return firebase.auth().signInWithCredential(facebookCredential)
 			.then((success) => {
 				console.log("Firebase success: " + JSON.stringify(success));
+				console.log('current user.providerData: ', firebase.auth().currentUser.providerData);
 				/* creating a user profile - for user profile purposes?
 				firebase.database().ref('/userProfile').child(success.uid)
 				.set({ email: email });

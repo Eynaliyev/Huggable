@@ -8,6 +8,7 @@ import firebase from 'firebase';
 import {MainTabsPage} from '../pages/main-tabs/main-tabs';
 import {WelcomePage} from '../pages/welcome/welcome';
 import {SettingPage} from '../pages/setting/setting';
+import {UserProfilePage} from '../pages/user-profile/user-profile';
 // end import pages
 
 @Component({
@@ -30,7 +31,12 @@ export class MyApp {
       count: 0,
       component: MainTabsPage
     },
-
+    {
+      title: 'Profile',
+      icon: 'ion-android-person',
+      count: 0,
+      component: UserProfilePage
+    },
     {
       title: 'Setting',
       icon: 'ios-home-outline',
@@ -42,7 +48,7 @@ export class MyApp {
 
   constructor(public platform: Platform,
     public authProvider: AuthProvider) {
-    console.log('inside app component');
+    //console.log('inside app component');
     this.zone = new NgZone({});
     this.rootPage = WelcomePage;
     firebase.initializeApp({
