@@ -6,7 +6,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 @Injectable()
 export class UserService {
 
-  private currentUser = firebase.auth().currentUser.providerData[0]
+  private currentUser;
   private users:any;
 
   constructor(public db: AngularFireDatabase) {
@@ -14,28 +14,54 @@ export class UserService {
   }
   //set current user depending on whether there's somebody 
   // like this, or create a new one
+  getCurrentUser(){
+    return this.currentUser;
+  }
   setCurrentUser(){
-    let user = this.getUserProfile(this.currentUser.uid);
-    console.log('checking if the user is there: ', user);
-    if(! user){
-      this.createUser(this.currentUser)
+    this.currentUser = firebase.auth().currentUser.providerData[0];
+    let userId = this.currentUser.uid;
+    console.log('checking if the user is there: ', userId);
+    this.checkIfUserExists(userId);
+  }
+  // Tests to see if /users/<userId> has any data. 
+  checkIfUserExists(uid) {
+    var usersRef = firebase.database().ref('/users');
+    usersRef.child(uid).once('value', snapshot => {
+      var exists = (snapshot.val() !== null);
+      this.userExistsCallback(uid, exists);
+    });
+  }
+  // if user exists, do nothing, if not, create a new user
+  userExistsCallback(userId, exists) {
+    if (exists) {
+      console.log('user ' + userId + ' exists!');
+    } else {
+      console.log('saving new user to the database');
+      this.createUser(this.currentUser);
     }
   }
   // Get Info of a Single User
-  getUserProfile(uid): Promise<any> {
+  getUserProfile(uid): FirebaseObjectObservable<any> {
+    return this.db.object('/users/' + uid);
+    /*
     return new Promise( (resolve, reject) => {
       firebase.database().ref('/users')
       .child(uid)
       .on('value', data => {
         resolve(data.val());
       });
-    });
+    });*/
   }
   // create user in firebase
   createUser(userCredentials) {
-    const userObservable = this.db.object('/users' + userCredentials.uid);
+    const userObservable = this.db.object('/users/' + userCredentials.uid);
     console.log('creating a new user in the back-end: ', userCredentials.uid);
-    userObservable.set(this.currentUser);
+    userObservable.set({
+      name: this.currentUser.displayName,
+      email: this.currentUser.email,
+      photoUrl: this.currentUser.photoURL,
+      provider: this.currentUser.providerId
+    });
   }
   // Get All users of our app - to be changed later to get relevant users
   // get base64 Picture of User - to be changed to get from storage later

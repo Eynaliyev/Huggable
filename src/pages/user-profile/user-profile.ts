@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { UserService } from '../../services/user-service';
 /**
  * Generated class for the UserProfile page.
  *
@@ -13,12 +13,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'user-profile.html',
 })
 export class UserProfilePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+	user;
+  constructor(public navCtrl: NavController,
+   public navParams: NavParams,
+   private userService: UserService) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserProfile');
+    this.user = this.userService.getCurrentUser();
   }
 
 }

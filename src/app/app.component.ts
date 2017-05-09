@@ -51,6 +51,7 @@ export class MyApp {
     //console.log('inside app component');
     this.zone = new NgZone({});
     this.rootPage = WelcomePage;
+    /*
     firebase.initializeApp({
       apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
       authDomain: "huggable-9e981.firebaseapp.com",
@@ -58,7 +59,7 @@ export class MyApp {
       projectId: "huggable-9e981",
       storageBucket: "huggable-9e981.appspot.com",
       messagingSenderId: "272489685620"
-    });
+    });*/
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       this.zone.run( () => {
         if (!user) {
