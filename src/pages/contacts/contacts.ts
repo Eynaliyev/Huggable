@@ -12,15 +12,21 @@ import {NotificationsPage} from "../notifications/notifications";
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-messages',
-  templateUrl: 'messages.html',
+  selector: 'page-contacts',
+  templateUrl: 'contacts.html',
 })
-export class MessagesPage {
-  public chats;
+export class ContactsPage {
+  public contacts;
 
-  constructor(public nav: NavController, public chatService: ChatService, public app: App) {
+  constructor(public nav: NavController, 
+    public chatService: ChatService, 
+    public app: App) {
    // set sample data
-    this.chats = chatService.getAll();
+    //this.chats = chatService.getAll();
+    userService.getUserContacts().subscribe(contacts => {
+      this.contacts = contacts;
+      console.log('contacts: ', contacts);
+    });
   }
 
   // view chat detail

@@ -20,7 +20,7 @@ export class UserDetailPage {
 
   constructor(public nav: NavController, public userService: UserService) {
     // set sample data
-    this.user = userService.getItem(1);
+    this.user = userService.getUserProfile(1);
   }
 
   // toggle favorite

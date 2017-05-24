@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {NavController, Content, Platform} from 'ionic-angular';
+import {NavController, Content, Platform, NavParams} from 'ionic-angular';
 
 import {ChatService} from '../../services/chat-service';
 
@@ -20,21 +20,12 @@ export class ChatDetailPage {
   public chat: any;
   public newMessage: any;
 
-  constructor(public nav: NavController, public chatService: ChatService, public platform: Platform) {
-    // get sample data only
-    //this.chat = chatService.getItem(navParams.get('id'));
-    this.chat = chatService.getItem(0);
-
-    /*
-    platform.ready().then(() => {
-      let content = this.content;
-      // scroll to bottom on keyboard show
-      window.addEventListener('native.keyboardshow', function () {
-        let dimensions = content.getContentDimensions();
-        content.scrollTo(0, dimensions.scrollHeight + dimensions.scrollTop, 0);
-      });
-    })
-    */
+  constructor(public nav: NavController, 
+    public chatService: ChatService, 
+    public platform: Platform,
+    private navParams: NavParams) {
+    let id = navParams.get('id');
+    this.chat = chatService.getChat(id);
   }
 
   // send message
@@ -43,7 +34,7 @@ export class ChatDetailPage {
       this.chat.messages.push({
         type: 'sent',
         text: this.newMessage,
-        image: '',
+        picture: '',
         time: 'Just now'
       });
 

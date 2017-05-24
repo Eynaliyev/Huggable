@@ -21,8 +21,7 @@ import {NotificationService} from '../services/notification-service';
 // import pages
 import {MainTabsPage} from '../pages/main-tabs/main-tabs';
 import {WelcomePage} from '../pages/welcome/welcome';
-import {MatchPage} from '../pages/match/match';
-import {MessagesPage} from '../pages/messages/messages';
+import {ContactsPage} from '../pages/contacts/contacts';
 import {MeetPage} from '../pages/meet/meet';
 import {FilterPage} from '../pages/filter/filter';
 import {NotificationsPage} from '../pages/notifications/notifications';
@@ -56,8 +55,7 @@ class CameraMock extends Camera {
     MyApp,
     MainTabsPage,
     WelcomePage,
-    MatchPage,
-    MessagesPage,
+    ContactsPage,
     MeetPage,
     FilterPage,
     NotificationsPage,
@@ -93,8 +91,7 @@ class CameraMock extends Camera {
     MyApp,
     MainTabsPage,
     WelcomePage,
-    MatchPage,
-    MessagesPage,
+    ContactsPage,
     MeetPage,
     FilterPage,
     NotificationsPage,
@@ -111,9 +108,10 @@ class CameraMock extends Camera {
     PostService,
     DateService,
     NotificationService,
-    Camera,
-    AuthProvider,
-    Facebook
+    //Camera,
+    {provide: Camera, useClass: CameraMock},
+    Facebook,
+    AuthProvider
     /* import services */
   ]
 })

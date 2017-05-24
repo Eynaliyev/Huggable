@@ -1,9 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController, Platform, MenuController} from 'ionic-angular';
-import {MatchPage} from "../match/match";
-import {MessagesPage} from "../messages/messages";
+import {ContactsPage} from "../contacts/contacts";
 import {MeetPage} from "../meet/meet";
-
 
 /*
  Generated class for the LoginPage page.
@@ -19,7 +17,7 @@ export class MainTabsPage {
   // tabs
   public nearby: any;
   public match: any;
-  public messages: any;
+  public contacts: any;
   public meet: any;
   public wall: any;
 
@@ -28,8 +26,7 @@ export class MainTabsPage {
 
   constructor(public nav: NavController, public platform: Platform, public menu: MenuController) {
     // set component for tabs
-    this.match = MatchPage;
-    this.messages = MessagesPage;
+    this.contacts = ContactsPage;
     this.meet = MeetPage;
 
     // disable menu

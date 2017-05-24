@@ -10,7 +10,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Messages</ion-title>
+    <ion-title>Contacts</ion-title>
     <ion-buttons end>
       <button ion-button (click)="viewNotifications()">
         <ion-icon name="notifications"></ion-icon>
@@ -22,15 +22,14 @@
 
 
 <ion-content>
-  <ion-list class="list-full-border">
-    <ion-item-sliding *ngFor="let chat of chats">
+  <ion-list class="list-full-border" *ngIf="contacts">
+    <ion-item-sliding *ngFor="let contact of user.contacts | async">
 
-      <ion-item text-wrap (click)="viewChat(chat.id)">
+      <ion-item text-wrap (click)="viewChat(contact.id)">
         <ion-avatar item-left>
-          <img class="profile-picture" src="{{ chat.face }}" alt=""/>
+          <img class="profile-picture" src="{{ contact.photoUrl }}" alt=""/>
         </ion-avatar>
-        <h2>{{chat.name}}, {{ chat.age }}</h2>
-        <span>{{ chat.state }}</span>
+        <h2>{{contact.name}}, {{ contact.age }}</h2>
         <p>{{chat.lastText}}</p>
       </ion-item>
 

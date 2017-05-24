@@ -13,7 +13,7 @@ import { UserService } from '../../services/user-service';
   templateUrl: 'user-profile.html',
 })
 export class UserProfilePage {
-	user;
+	user = JSON.parse( localStorage.getItem('currentUser'));
   constructor(public navCtrl: NavController,
    public navParams: NavParams,
    private userService: UserService) {
@@ -21,7 +21,7 @@ export class UserProfilePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserProfile');
-    this.user = this.userService.getCurrentUser();
+    console.log('current user in user profile: ', this.user);
   }
 
 }

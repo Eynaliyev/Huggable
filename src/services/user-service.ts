@@ -1,27 +1,39 @@
 import {Injectable} from "@angular/core";
-import {USERS} from "./mock-users";
 import firebase from 'firebase';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Injectable()
 export class UserService {
 
+  private contacts: FirebaseListObservable<any[]>;
   private currentUser;
-  private users:any;
+  private users: FirebaseListObservable<any[]>;
+  private user = JSON.parse(localStorage.getItem('currentUser'));
 
   constructor(public db: AngularFireDatabase) {
-    this.users = USERS;
+    this.users = db.list("/users");
+    this.contacts = db.list(`/users/${this.user.uid}/chats`);
   }
-  //set current user depending on whether there's somebody 
-  // like this, or create a new one
+  getUid(){
+    return JSON.parse(localStorage.getItem('currentUser')).uid;
+  }
   getCurrentUser(){
-    return this.currentUser;
+    return JSON.parse(localStorage.getItem('currentUser'));
   }
-  setCurrentUser(){
-    this.currentUser = firebase.auth().currentUser.providerData[0];
-    let userId = this.currentUser.uid;
-    console.log('checking if the user is there: ', userId);
-    this.checkIfUserExists(userId);
+  //set current user depending on whether there's somebody like this, or create a new one
+  //check for presence of dummy data with arguments
+  //if it's there, set current user to dummy data
+  setCurrentUser(dummy?: any){
+    if (dummy) {
+      console.log("setting current user to:", dummy);
+      localStorage.setItem('currentUser', JSON.stringify(dummy));
+    } else {
+      localStorage.setItem('currentUser', JSON.stringify(firebase.auth().currentUser.providerData[0]));
+      this.currentUser = firebase.auth().currentUser.providerData[0];
+      let userId = this.currentUser.uid;
+      console.log('checking if the user is there: ', userId);
+      this.checkIfUserExists(userId); 
+    }
   }
   // Tests to see if /users/<userId> has any data. 
   checkIfUserExists(uid) {
@@ -42,19 +54,11 @@ export class UserService {
   }
   // Get Info of a Single User
   getUserProfile(uid): FirebaseObjectObservable<any> {
-    return this.db.object('/users/' + uid);
-    /*
-    return new Promise( (resolve, reject) => {
-      firebase.database().ref('/users')
-      .child(uid)
-      .on('value', data => {
-        resolve(data.val());
-      });
-    });*/
+    return this.db.object(`/users/${uid}`);
   }
   // create user in firebase
   createUser(userCredentials) {
-    const userObservable = this.db.object('/users/' + userCredentials.uid);
+    const userObservable = this.db.object(`/users/${userCredentials.uid}`);
     console.log('creating a new user in the back-end: ', userCredentials.uid);
     userObservable.set({
       name: this.currentUser.displayName,
@@ -63,22 +67,14 @@ export class UserService {
       provider: this.currentUser.providerId
     });
   }
-  // Get All users of our app - to be changed later to get relevant users
-  // get base64 Picture of User - to be changed to get from storage later
-  // Update Profile Picture of the user
-  getAll() {
-    return this.users;
-  }
-  getItem(id) {
-    for (var i = 0; i < this.users.length; i++) {
-      if (this.users[i].id === parseInt(id)) {
-        return this.users[i];
-      }
-    }
-    return null;
+  //logic for contacts list page
+  // get list of Chats of the current user
+  getUserContacts(): FirebaseListObservable<any[]> {
+    let contacts = this.db.list(`/users/${this.user.uid}/contacts`);
+    return contacts;
   }
 
-  remove(item) {
-    this.users.splice(this.users.indexOf(item), 1);
+  remove(id) {
+    this.users.remove(id);
   }
 }

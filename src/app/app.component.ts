@@ -3,6 +3,7 @@ import {Platform} from 'ionic-angular';
 import {ViewChild} from '@angular/core';
 import {StatusBar} from 'ionic-native';
 import {AuthProvider} from '../providers/auth-provider';
+import {UserService} from '../services/user-service';
 import firebase from 'firebase';
 // import pages
 import {MainTabsPage} from '../pages/main-tabs/main-tabs';
@@ -21,6 +22,7 @@ export class MyApp {
 
   public rootPage: any;
   zone:NgZone;
+  user;
 
   public nav: any;
 
@@ -47,19 +49,12 @@ export class MyApp {
   ];
 
   constructor(public platform: Platform,
-    public authProvider: AuthProvider) {
+    public authProvider: AuthProvider,
+    private userService: UserService) {
     //console.log('inside app component');
     this.zone = new NgZone({});
     this.rootPage = WelcomePage;
-    /*
-    firebase.initializeApp({
-      apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
-      authDomain: "huggable-9e981.firebaseapp.com",
-      databaseURL: "https://huggable-9e981.firebaseio.com",
-      projectId: "huggable-9e981",
-      storageBucket: "huggable-9e981.appspot.com",
-      messagingSenderId: "272489685620"
-    });*/
+    this.user = this.userService.getCurrentUser();
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       this.zone.run( () => {
         if (!user) {
