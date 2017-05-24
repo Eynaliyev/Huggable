@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, App} from 'ionic-angular';
-import {ChatService} from "../../services/chat-service";
+import {UserService} from "../../services/user-service";
 import {ChatDetailPage} from "../chat-detail/chat-detail";
 import {NotificationsPage} from "../notifications/notifications";
 
@@ -19,7 +19,7 @@ export class ContactsPage {
   public contacts;
 
   constructor(public nav: NavController, 
-    public chatService: ChatService, 
+    public userService: UserService, 
     public app: App) {
    // set sample data
     //this.chats = chatService.getAll();

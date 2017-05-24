@@ -23,7 +23,7 @@
 
 <ion-content>
   <ion-list class="list-full-border" *ngIf="contacts">
-    <ion-item-sliding *ngFor="let contact of user.contacts | async">
+    <ion-item-sliding *ngFor="let contact of contacts | async">
 
       <ion-item text-wrap (click)="viewChat(contact.id)">
         <ion-avatar item-left>
