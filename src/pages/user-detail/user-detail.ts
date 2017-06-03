@@ -3,7 +3,7 @@ import {NavController} from 'ionic-angular';
 
 import {UserService} from '../../services/user-service';
 import {ChatDetailPage} from "../chat-detail/chat-detail";
-
+import { User } from '../../shared/user.model';
 /*
   Generated class for the LoginPage page.
 
@@ -16,21 +16,15 @@ import {ChatDetailPage} from "../chat-detail/chat-detail";
 })
 export class UserDetailPage {
   // user info
-  public user: any;
+  public user: User;
 
   constructor(public nav: NavController, public userService: UserService) {
     // set sample data
-    this.user = userService.getUserProfile(1);
+    userService.getUserProfile('uid1').subscribe(user => this.user = user);
   }
 
-  // toggle favorite
-  toggleFav() {
-    this.user.isFaved = !this.user.isFaved;
-  }
-
-  // toggle like
-  toggleLike() {
-    this.user.isLiked = !this.user.isLiked;
+  // like somebody
+  like() {
   }
 
   // open chat

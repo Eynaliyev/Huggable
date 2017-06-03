@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {NavController, App} from 'ionic-angular';
+import {NavController, App, LoadingController} from 'ionic-angular';
 import {UserService} from "../../services/user-service";
 import {ChatDetailPage} from "../chat-detail/chat-detail";
 import {NotificationsPage} from "../notifications/notifications";
-
+import { UtilProvider } from "../../providers/util-provider";
+import { Contact } from '../../shared/user.model';
 
 /*
   Generated class for the LoginPage page.
@@ -16,26 +17,40 @@ import {NotificationsPage} from "../notifications/notifications";
   templateUrl: 'contacts.html',
 })
 export class ContactsPage {
-  public contacts;
+  public contacts: Contact[];
 
   constructor(public nav: NavController, 
     public userService: UserService, 
-    public app: App) {
-   // set sample data
-    //this.chats = chatService.getAll();
-    userService.getUserContacts().subscribe(contacts => {
+    public loadingCtrl: LoadingController,
+    public utilProvider: UtilProvider,
+    public navCtrl: NavController,
+    public app: App) {  }
+  
+  ionViewDidLoad() {
+    this.userService.getUserContacts().subscribe(contacts => {
       this.contacts = contacts;
-      console.log('contacts: ', contacts);
+      loading.dismiss().then(() => console.log('contacts: ', contacts))
+    }, error => {
+      loading.dismiss().then( () => {
+        this.utilProvider.doAlert(error.message, {
+          text: "Ok",
+          role: 'cancel'
+        });
+      });
     });
+    let loading = this.loadingCtrl.create();
+    loading.present();
   }
-
   // view chat detail
-  viewChat(id) {
-    this.app.getRootNav().push(ChatDetailPage, {id: id});
+  viewChat(id, photo) {
+    this.userService.getUid().then(uid =>{
+      let params = {uid: uid, otherId: id, photoUrl: photo}
+      this.app.getRootNav().push(ChatDetailPage, params);
+    });
   }
 
   // view notifications
   viewNotifications() {
-    this.app.getRootNav().push(NotificationsPage);
+    this.navCtrl.push(NotificationsPage);
   }
 }

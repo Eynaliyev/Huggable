@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
-import {NavController, MenuController, LoadingController, AlertController} from 'ionic-angular';
-import {MainTabsPage} from "../main-tabs/main-tabs";
-import {AuthProvider} from "../../providers/auth-provider";
+import { Component } from '@angular/core';
+import { NavController, MenuController, LoadingController} from 'ionic-angular';
+import { MainTabsPage } from "../main-tabs/main-tabs";
+import { AuthProvider } from "../../providers/auth-provider";
+import { UtilProvider } from "../../providers/util-provider";
 /*
   Generated class for the LoginPage page.
 
@@ -17,7 +18,7 @@ export class WelcomePage {
   constructor(public nav: NavController, 
     public menu: MenuController, 
     public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
+    public utilProvider: UtilProvider,
     public authProvider: AuthProvider) {
     // disable menu
       this.menu.swipeEnable(false);
@@ -35,16 +36,10 @@ export class WelcomePage {
       });
     }, error => {
       loading.dismiss().then( () => {
-        let alert = this.alertCtrl.create({
-          message: error.message,
-          buttons: [
-            {
-              text: "Ok",
-              role: 'cancel'
-            }
-          ]
+        this.utilProvider.doAlert(error.message, {
+          text: "Ok",
+          role: 'cancel'
         });
-        alert.present();
       });
     });
     let loading = this.loadingCtrl.create();

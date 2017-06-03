@@ -28,13 +28,9 @@
     <ion-grid class="action-btn">
       <ion-row>
         <ion-col text-center>
-          <button ion-button color="white" margin-right (click)="toggleFav()">
-            <ion-icon name="add" color="fb-color" [hidden]="user.isFaved"></ion-icon>
-            <ion-icon name="close" color="fb-color" [hidden]="!user.isFaved"></ion-icon>
-          </button>
         </ion-col>
         <ion-col text-center>
-          <button ion-button color="white" margin-right (click)="toggleLike()">
+          <button ion-button color="white" margin-right (click)="like()">
             <ion-icon name="{{ user.isLiked ? 'ios-heart' : 'ios-heart-outline'}}" color="danger"></ion-icon>
           </button>
         </ion-col>

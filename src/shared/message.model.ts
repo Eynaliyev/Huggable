@@ -1,8 +1,9 @@
 export class Message {
   constructor(
-    public text: string,
+  	public from: string,
     public type: string,
-    public picture: string,
-    public time: number
+    public time: number,
+    public text?: string,
+    public picture?: {}
   ) {  }
 }

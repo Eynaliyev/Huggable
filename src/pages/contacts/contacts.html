@@ -23,14 +23,14 @@
 
 <ion-content>
   <ion-list class="list-full-border" *ngIf="contacts">
-    <ion-item-sliding *ngFor="let contact of contacts | async">
+    <ion-item-sliding *ngFor="let contact of contacts">
 
-      <ion-item text-wrap (click)="viewChat(contact.id)">
+      <ion-item text-wrap (click)="viewChat(contact.id, contact.photoUrl)">
         <ion-avatar item-left>
           <img class="profile-picture" src="{{ contact.photoUrl }}" alt=""/>
         </ion-avatar>
         <h2>{{contact.name}}, {{ contact.age }}</h2>
-        <p>{{chat.lastText}}</p>
+        <p>{{contact.lastText}}</p>
       </ion-item>
 
       <ion-item-options>

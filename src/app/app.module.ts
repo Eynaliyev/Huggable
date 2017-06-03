@@ -10,6 +10,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 // import services
+import {UtilProvider} from '../providers/util-provider';
 import {AuthProvider} from '../providers/auth-provider';
 import {UserService} from '../services/user-service';
 import {ChatService} from '../services/chat-service';
@@ -111,7 +112,8 @@ class CameraMock extends Camera {
     //Camera,
     {provide: Camera, useClass: CameraMock},
     Facebook,
-    AuthProvider
+    AuthProvider,
+    UtilProvider
     /* import services */
   ]
 })

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserService } from '../../services/user-service';
+import { User } from '../../shared/user.model';
 /**
  * Generated class for the UserProfile page.
  *
@@ -13,15 +14,17 @@ import { UserService } from '../../services/user-service';
   templateUrl: 'user-profile.html',
 })
 export class UserProfilePage {
-	user = JSON.parse( localStorage.getItem('currentUser'));
+  user: User;
   constructor(public navCtrl: NavController,
    public navParams: NavParams,
    private userService: UserService) {
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserProfile');
-    console.log('current user in user profile: ', this.user);
+    this.userService.getUid().then(uid => {
+      this.userService.getUserProfile(uid)
+      .subscribe(user => this.user = user);
+    });
   }
 
 }

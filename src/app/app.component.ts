@@ -10,6 +10,7 @@ import {MainTabsPage} from '../pages/main-tabs/main-tabs';
 import {WelcomePage} from '../pages/welcome/welcome';
 import {SettingPage} from '../pages/setting/setting';
 import {UserProfilePage} from '../pages/user-profile/user-profile';
+import { User } from '../shared/user.model';
 // end import pages
 
 @Component({
@@ -22,7 +23,7 @@ export class MyApp {
 
   public rootPage: any;
   zone:NgZone;
-  user;
+  private user: User;
 
   public nav: any;
 
@@ -54,7 +55,7 @@ export class MyApp {
     //console.log('inside app component');
     this.zone = new NgZone({});
     this.rootPage = WelcomePage;
-    this.user = this.userService.getCurrentUser();
+    this.userService.getCurrentUser().then(user => this.user = user);
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       this.zone.run( () => {
         if (!user) {

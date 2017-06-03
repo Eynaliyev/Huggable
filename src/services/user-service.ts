@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
 import firebase from 'firebase';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import {User} from '../shared/user/model';
+import { User } from '../shared/user.model';
+import { Camera } from 'ionic-native';
 
 @Injectable()
 export class UserService {
@@ -15,37 +16,71 @@ export class UserService {
     this.users = db.list("/users");
     this.contacts = db.list(`/users/${this.user.uid}/chats`);
   }
-  getUid(): string{
-    return JSON.parse(localStorage.getItem('currentUser')).uid;
+  getUid(): Promise<string>{
+    let res = new Promise<any>((resolve, reject) => {
+        console.log('uid in getUid(): ', JSON.parse(localStorage.getItem('currentUser')).uid);
+        resolve(JSON.parse(localStorage.getItem('currentUser')).uid);
+    });
+    return res;
   }
-  getCurrentUser(): User{
-    return JSON.parse(localStorage.getItem('currentUser'));
+  getCurrentUser(): Promise<User>{
+    let res = new Promise<any>((resolve, reject) => {
+        console.log('currentUser in getCurrentUser(): ', JSON.parse(localStorage.getItem('currentUser')));
+        resolve(JSON.parse(localStorage.getItem('currentUser')));
+    });
+    return res;
+  }
+  getPicture(){
+    let base64Picture;
+    let options = {
+      destinationType: 0,
+      sourceType: 0,
+      encodingType: 0
+    };
+    let promise = new Promise((resolve, reject) => {
+      Camera.getPicture(options).then(imageData => {
+        base64Picture = "data:image/jpeg;base64," + imageData;
+        resolve(base64Picture);
+        }, (error) => {
+          reject(error);
+      });
+    });
+    return promise;
+  }
+  // Update Profile Picture
+  updatePicture() {
+    this.getUid().then(uid => {
+      let pictureRef = this.db.object(`/users/${uid}/picture`);
+      this.getPicture().then(image => {
+        pictureRef.set(image);
+      });
+    });
   }
   //set current user depending on whether there's somebody like this, or create a new one
   //check for presence of dummy data with arguments
   //if it's there, set current user to dummy data
-  setCurrentUser(dummy?: any){
+  setCurrentUser(dummy?: any): void{
     if (dummy) {
       console.log("setting current user to:", dummy);
       localStorage.setItem('currentUser', JSON.stringify(dummy));
     } else {
       localStorage.setItem('currentUser', JSON.stringify(firebase.auth().currentUser.providerData[0]));
-      this.currentUser = firebase.auth().currentUser.providerData[0];
-      let userId = this.currentUser.uid;
+      this.currentUser = this.toUser(firebase.auth().currentUser.providerData[0]);
+      let userId = JSON.parse(localStorage.getItem('currentUser')).uid;
       console.log('checking if the user is there: ', userId);
       this.checkIfUserExists(userId); 
     }
   }
   // Tests to see if /users/<userId> has any data. 
-  checkIfUserExists(uid: string) {
+  checkIfUserExists(id: string): void {
     var usersRef = firebase.database().ref('/users');
-    usersRef.child(uid).once('value', snapshot => {
+    usersRef.child(id).once('value', snapshot => {
       var exists = (snapshot.val() !== null);
-      this.userExistsCallback(uid, exists);
+      this.userExistsCallback(id, exists);
     });
   }
   // if user exists, do nothing, if not, create a new user
-  userExistsCallback(userId: string, exists: boolean) {
+  userExistsCallback(userId: string, exists: boolean): void {
     if (exists) {
       console.log('user ' + userId + ' exists!');
     } else {
@@ -54,19 +89,24 @@ export class UserService {
     }
   }
   // Get Info of a Single User
-  getUserProfile(uid: string): FirebaseObjectObservable<User> {
-    return this.db.object(`/users/${uid}`);
+  getUserProfile(id: string): FirebaseObjectObservable<User> {
+    return this.db.object(`/users/${id}`);
   }
   // create user in firebase
   createUser(userCredentials): void {
     const userObservable = this.db.object(`/users/${userCredentials.uid}`);
     console.log('creating a new user in the back-end: ', userCredentials.uid);
-    userObservable.set({
-      name: this.currentUser.displayName,
-      email: this.currentUser.email,
-      photoUrl: this.currentUser.photoURL,
-      provider: this.currentUser.providerId
-    });
+    userObservable.set(this.toUser(this.currentUser));
+  }
+  toUser(data): User{
+    let user = {
+      uid: data.uid,
+      name: data.displayName,
+      email: data.email,
+      photoUrl: data.photoURL,
+      provider: data.providerId
+    }
+    return user;
   }
   //deleting a user from the database 
   remove(id: string): void {
@@ -81,7 +121,7 @@ export class UserService {
   // TO DO ADD LIKING< CREATING AND CHECKING FOR THEM
 
   // create a contact - add chat references to both users
-  addContact(otherId: string): void {
+  addContact(uid: string, otherId: string): void {
     //tgetting user data to set in contacts user
     this.getUserProfile(otherId).subscribe(user => {
       // mapping the data to the contact interface
@@ -105,12 +145,14 @@ export class UserService {
       };
       otherRef.push(thisUser);
       //push it to the chats list
-      let chatsRef = this.db.list(`/chats/${userId},${otherId}`);
-      chatsRef.push({
-        text: "You successfully connected, time to say Hi! :)",
-        type: "system-message",
-        picture: '',
-        time: firebase.database.ServerValue.TIMESTAMP
+      this.getUid().then(uid => {
+        let chatsRef = this.db.list(`/chats/${uid},${otherId}`);
+        chatsRef.push({
+          text: "You successfully connected, time to say Hi! :)",
+          type: "system-message",
+          picture: '',
+          time: firebase.database.ServerValue.TIMESTAMP
+        })
       });
     });
   }
@@ -120,9 +162,10 @@ export class UserService {
     this.contacts.remove(id);
     //other user
     let otherRef = this.db.list(`/users/${id}/contacts`);
-    let userId = this.user.uid;
-    otherRef.remove(userId);   
-    //chats list 
-    this.db.list(`/chats/${this.user.uid},${id}`).remove()
+    this.getUid().then(uid => {
+      otherRef.remove(uid);   
+      //chats list 
+      this.db.list(`/chats/${uid},${id}`).remove();
+    });
   }
 }

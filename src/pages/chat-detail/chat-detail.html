@@ -17,17 +17,18 @@
 
 
 <ion-content>
-  <div *ngFor="let message of chat.messages" class="message-wrapper rlt">
+  <div *ngFor="let message of messages" class="message-wrapper rlt">
+    <p>{{message.text}}</p>
 
     <div *ngIf="message.type == 'received'">
 
-      <img class="profile-picture left" src="{{ chat.face }}"/>
+      <img class="profile-picture left" [src]="photoUrl"/>
 
       <div class="chat-bubble left">
 
         <div class="message">
           {{ message.text }}
-          <img src="{{ message.picture }}" class="block" *ngIf="message.ipicture" alt=""/>
+          <img [src]="message.picture" class="block" *ngIf="message.picture" alt=""/>
         </div>
 
         <div class="message-detail">
@@ -39,12 +40,13 @@
 
     <div *ngIf="message.type == 'sent'">
 
-      <img class="profile-picture right" src="assets/img/user/adam.jpg"/>
+      <img class="profile-picture right" [src]="user.photoUrl"/>
 
       <div class="chat-bubble right">
 
         <div class="message" ng-bind-html="message.text">
           {{ message.text }}
+          <img [src]="message.picture" class="block" *ngIf="message.ipicture" alt=""/>
         </div>
 
         <div class="message-detail">
