@@ -12,10 +12,8 @@ export class UserService {
   private users: FirebaseListObservable<User[]>;
   private user: User = JSON.parse(localStorage.getItem('currentUser'));
 
-  constructor(public db: AngularFireDatabase) {
-    this.users = db.list("/users");
-    this.contacts = db.list(`/users/${this.user.uid}/chats`);
-  }
+  constructor(public db: AngularFireDatabase) {}
+
   getUid(): Promise<string>{
     let res = new Promise<any>((resolve, reject) => {
         console.log('uid in getUid(): ', JSON.parse(localStorage.getItem('currentUser')).uid);
@@ -25,7 +23,6 @@ export class UserService {
   }
   getCurrentUser(): Promise<User>{
     let res = new Promise<any>((resolve, reject) => {
-        console.log('currentUser in getCurrentUser(): ', JSON.parse(localStorage.getItem('currentUser')));
         resolve(JSON.parse(localStorage.getItem('currentUser')));
     });
     return res;
@@ -109,19 +106,21 @@ export class UserService {
     return user;
   }
   //deleting a user from the database 
-  remove(id: string): void {
-    this.users.remove(id);
+  removeUser(id: string): void {
+    let usersRef = this.db.list(`/users`)
+    usersRef.remove(id);
   }
   //logic for contacts list page
   // get list of contacts of the current user
-  getUserContacts(): FirebaseListObservable<any[]> {
-    let contacts = this.db.list(`/users/${this.user.uid}/contacts`);
+  getUserContacts(uid): FirebaseListObservable<any[]> {
+    let contacts = this.db.list(`/users/${uid}/contacts`);
     return contacts;
   }
   // TO DO ADD LIKING< CREATING AND CHECKING FOR THEM
 
   // create a contact - add chat references to both users
   addContact(uid: string, otherId: string): void {
+    let thisRef = this.db.list(`/users/${uid}/contacts`);
     //tgetting user data to set in contacts user
     this.getUserProfile(otherId).subscribe(user => {
       // mapping the data to the contact interface
@@ -133,7 +132,7 @@ export class UserService {
         lastText: "You successfully connected, time to say Hi! :)"
       }
       // seting the contact in this users' contacts list
-      this.contacts.push(otherUser);
+      thisRef.push(otherUser);
       //the other user
       let otherRef = this.db.list(`/users/${otherId}/contacts`);
       let thisUser = {

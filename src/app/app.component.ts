@@ -2,13 +2,14 @@ import {Component, NgZone} from '@angular/core';
 import {Platform} from 'ionic-angular';
 import {ViewChild} from '@angular/core';
 import {StatusBar} from 'ionic-native';
-import {AuthProvider} from '../providers/auth-provider';
+import {AuthService} from '../services/auth-service';
 import {UserService} from '../services/user-service';
 import firebase from 'firebase';
 // import pages
 import {MainTabsPage} from '../pages/main-tabs/main-tabs';
 import {WelcomePage} from '../pages/welcome/welcome';
 import {SettingPage} from '../pages/setting/setting';
+import {ContactsPage} from "../pages/contacts/contacts";
 import {UserProfilePage} from '../pages/user-profile/user-profile';
 import { User } from '../shared/user.model';
 // end import pages
@@ -28,11 +29,18 @@ export class MyApp {
   public nav: any;
 
   public pages = [
+
     {
       title: 'Home',
       icon: 'ios-home-outline',
       count: 0,
       component: MainTabsPage
+    },
+    {
+      title: 'Contacts',
+      icon: 'ion-ios-people',
+      count: 0,
+      component: ContactsPage
     },
     {
       title: 'Profile',
@@ -50,7 +58,7 @@ export class MyApp {
   ];
 
   constructor(public platform: Platform,
-    public authProvider: AuthProvider,
+    public authService: AuthService,
     private userService: UserService) {
     //console.log('inside app component');
     this.zone = new NgZone({});
@@ -80,7 +88,7 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
   logout() {
-    this.authProvider.logoutUser()
+    this.authService.logoutUser()
     .then(() => this.nav.setRoot(WelcomePage));
   }
 }

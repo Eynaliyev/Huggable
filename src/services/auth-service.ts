@@ -5,18 +5,18 @@ import firebase from 'firebase';
 import { Facebook } from '@ionic-native/facebook';
 import {UserService} from '../services/user-service';
 /*
-  Generated class for the AuthProvider provider.
+  Generated class for the AuthService provider.
 
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
 @Injectable()
-export class AuthProvider {
+export class AuthService {
 
   constructor(public http: Http,
   	private facebook: Facebook,
   	public userService: UserService) {
-    console.log('Hello AuthProvider Provider');
+    console.log('Hello AuthService');
   }
 	facebookLogin(): firebase.Promise<any> {
 		//check for platform if web return a promise,

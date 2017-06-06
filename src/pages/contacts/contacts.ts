@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {NavController, App, LoadingController} from 'ionic-angular';
+import {NavController, App} from 'ionic-angular';
 import {UserService} from "../../services/user-service";
 import {ChatDetailPage} from "../chat-detail/chat-detail";
 import {NotificationsPage} from "../notifications/notifications";
-import { UtilProvider } from "../../providers/util-provider";
+import { UtilService } from "../../services/util-service";
 import { Contact } from '../../shared/user.model';
 
 /*
@@ -21,25 +21,21 @@ export class ContactsPage {
 
   constructor(public nav: NavController, 
     public userService: UserService, 
-    public loadingCtrl: LoadingController,
-    public utilProvider: UtilProvider,
+    public utilService: UtilService,
     public navCtrl: NavController,
     public app: App) {  }
   
   ionViewDidLoad() {
-    this.userService.getUserContacts().subscribe(contacts => {
-      this.contacts = contacts;
-      loading.dismiss().then(() => console.log('contacts: ', contacts))
-    }, error => {
-      loading.dismiss().then( () => {
-        this.utilProvider.doAlert(error.message, {
+    this.userService.getUid().then(uid => {
+      this.userService.getUserContacts(uid).subscribe(contacts => {
+        this.contacts = contacts;
+      }, error => {
+        this.utilService.doAlert(error.message, {
           text: "Ok",
           role: 'cancel'
         });
       });
     });
-    let loading = this.loadingCtrl.create();
-    loading.present();
   }
   // view chat detail
   viewChat(id, photo) {

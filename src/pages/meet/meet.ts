@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {NavController, App} from 'ionic-angular';
-import {DateService} from "../../services/date-service";
+//import {DateService} from "../../services/date-service";
 import {DatePage} from "../date/date";
 import {UserDetailPage} from "../user-detail/user-detail";
 import {NotificationsPage} from "../notifications/notifications";
@@ -19,9 +19,11 @@ import {NotificationsPage} from "../notifications/notifications";
 export class MeetPage {
   public dates: any;
 
-  constructor(public nav: NavController, public dateService: DateService, public app: App) {
+  constructor(public nav: NavController, 
+    //public dateService: DateService, 
+    public app: App) {
     // set sample data
-    this.dates = dateService.getAll();
+    //this.dates = dateService.getAll();
   }
 
   // view date

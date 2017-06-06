@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 
-import {DateService} from '../../services/date-service';
+//import {DateService} from '../../services/date-service';
 
 /*
   Generated class for the LoginPage page.
@@ -17,8 +17,10 @@ export class DatePage {
   // dating
   public dating: any;
 
-  constructor(public nav: NavController, public dateService: DateService) {
+  constructor(public nav: NavController
+    //, public dateService: DateService
+    ) {
     // set sample data
-    this.dating = dateService.getItem(1);
+    //this.dating = dateService.getItem(1);
   }
 }

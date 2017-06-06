@@ -3,22 +3,10 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { SwingModule } from 'angular2-swing';
-import { Camera } from '@ionic-native/camera';
 import { HttpModule } from '@angular/http';
-import { Facebook } from '@ionic-native/facebook';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-
-// import services
-import {UtilProvider} from '../providers/util-provider';
-import {AuthProvider} from '../providers/auth-provider';
-import {UserService} from '../services/user-service';
-import {ChatService} from '../services/chat-service';
-import {PostService} from '../services/post-service';
-import {DateService} from '../services/date-service';
-import {NotificationService} from '../services/notification-service';
-// end import services
-
+import { AppProviders } from './app.providers';
 // import pages
 import {MainTabsPage} from '../pages/main-tabs/main-tabs';
 import {WelcomePage} from '../pages/welcome/welcome';
@@ -29,8 +17,10 @@ import {NotificationsPage} from '../pages/notifications/notifications';
 import {UserProfilePage} from '../pages/user-profile/user-profile';
 import {UserDetailPage} from '../pages/user-detail/user-detail';
 import {ChatDetailPage} from '../pages/chat-detail/chat-detail';
+import {RoomDetailPage} from '../pages/room-detail/room-detail';
 import {DatePage} from '../pages/date/date';
 import {SettingPage} from '../pages/setting/setting';
+import { LoaderComponent } from '../shared/loader.component'
 // end import pages
 
 // AF2 Settings
@@ -42,14 +32,6 @@ export const firebaseConfig = {
   storageBucket: "huggable-9e981.appspot.com",
   messagingSenderId: "272489685620"
 };
-
-class CameraMock extends Camera {
-  getPicture(options){
-    return new Promise( (resolve, reject) => {
-      resolve(`TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlzIHNpbmd1bGFyIHBhc3Npb24gZnJvbSBvdGhlciBhbmltYWxzLCB3aGljaCBpcyBhIGx1c3Qgb2YgdGhlIG1pbmQsIHRoYXQgYnkgYSBwZXJzZXZlcmFuY2Ugb2YgZGVsaWdodCBpbiB0aGUgY29udGludWVkIGFuZCBpbmRlZmF0aWdhYmxlIGdlbmVyYXRpb24gb2Yga25vd2xlZGdlLCBleGNlZWRzIHRoZSBzaG9ydCB2ZWhlbWVuY2Ugb2YgYW55IGNhcm5hbCBwbGVhc3VyZS4=`);
-    });
-  }
-}
 
 @NgModule({
   declarations: [
@@ -64,7 +46,9 @@ class CameraMock extends Camera {
     ChatDetailPage,
     DatePage,
     SettingPage,
-    UserProfilePage
+    UserProfilePage,
+    RoomDetailPage,
+    LoaderComponent
     /* import pages */
   ],
   imports: [
@@ -103,18 +87,6 @@ class CameraMock extends Camera {
     UserProfilePage
     /* import pages */
   ],
-  providers: [
-    UserService,
-    ChatService,
-    PostService,
-    DateService,
-    NotificationService,
-    //Camera,
-    {provide: Camera, useClass: CameraMock},
-    Facebook,
-    AuthProvider,
-    UtilProvider
-    /* import services */
-  ]
+  providers: AppProviders.getProviders()
 })
 export class AppModule {}

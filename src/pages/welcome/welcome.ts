@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, MenuController, LoadingController} from 'ionic-angular';
 import { MainTabsPage } from "../main-tabs/main-tabs";
-import { AuthProvider } from "../../providers/auth-provider";
-import { UtilProvider } from "../../providers/util-provider";
+import { AuthService } from "../../services/auth-service";
+import { UtilService } from "../../services/util-service";
 /*
   Generated class for the LoginPage page.
 
@@ -18,8 +18,8 @@ export class WelcomePage {
   constructor(public nav: NavController, 
     public menu: MenuController, 
     public loadingCtrl: LoadingController,
-    public utilProvider: UtilProvider,
-    public authProvider: AuthProvider) {
+    public utilService: UtilService,
+    public authService: AuthService) {
     // disable menu
       this.menu.swipeEnable(false);
       //console.log('inside welcome page');
@@ -29,14 +29,14 @@ export class WelcomePage {
     this.nav.setRoot(MainTabsPage);
   }
   facebookLogin(): void {
-    this.authProvider.facebookLogin()
+    this.authService.facebookLogin()
       .then( authData => {
         loading.dismiss().then( () => {
           this.goToHome();
       });
     }, error => {
       loading.dismiss().then( () => {
-        this.utilProvider.doAlert(error.message, {
+        this.utilService.doAlert(error.message, {
           text: "Ok",
           role: 'cancel'
         });

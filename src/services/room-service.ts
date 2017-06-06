@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
-import {Chat} from '../shared/chat.model';
+import {Room} from '../shared/room.model';
 import {UserService} from './user-service';
 import {Message} from '../shared/message.model';
 import { UtilService} from '../services/util-service';
@@ -8,53 +8,58 @@ import firebase from 'firebase';
 
 
 @Injectable()
-export class ChatService {
+export class RoomService {
   constructor(
     public db: AngularFireDatabase, 
     public us: UserService,
     private utilService: UtilService) {
   }
-  // get a specific chat from the list - get chat reference
-  getChat(uid: string, id: string): FirebaseObjectObservable<any> {
-    let chatRef = this.db.object(`/chats/${uid},${id}`);
-    return chatRef;
+  // get a specific room from the list - get room reference
+  getRoom(uid: string, id: string): FirebaseObjectObservable<any> {
+    let roomRef = this.db.object(`/rooms/${uid},${id}`);
+    return roomRef;
   }
   getMessages(uid: string, id: string): FirebaseListObservable<any> {
-    let messagesRef = this.db.list(`/chats/${uid},${id}/messages`);
+    let messagesRef = this.db.list(`/rooms/${uid},${id}/messages`);
     return messagesRef;
-  }  // mapping to the chat data used in-app
-  toChat(userId, otherId, messages): Chat{
+  }  // mapping to the room data used in-app
+  toRoom(userId, otherId, messages): Room{
     // unique id based on the ids of two users
-    let combinedId = [userId, otherId]
-    let chat = {
-      id: combinedId,
-      messages: messages
+    let room = {
+      id: userId,
+      messages: messages,
+      guysWaitlist: [],
+      girlsWaitlist: [],
+      location: [],
+      menNum: 0,
+      womenNum: 0,
+      members: []
     }
-    return chat;
+    return room;
   }
-  // create a chat - add chat references to both users
+  // create a room - add room references to both users
   addMessage(uid: string, otherId: string, message: Message): void {
-    //push it to the chats list
-    let chatsRef = this.db.list(`/chats/${uid},${otherId}/messages`);
+    //push it to the rooms list
+    let roomsRef = this.db.list(`/rooms/${uid},${otherId}/messages`);
     if (message.picture === null){
-      chatsRef.push(message);
+      roomsRef.push(message);
     } else {
       //assuming we have a picture so we'll need to store it in firebase 
       //storage and save the URL as a picture property
       //generate a unique name for storing in firebase storage
       let uidName = this.utilService.guid();
-      firebase.storage().ref(`/chats/${uid},${otherId}/messages`)
+      firebase.storage().ref(`/rooms/${uid},${otherId}/messages`)
       .child(`${uidName}.png`)
       .putString(message.picture, 'base64', {contentType: 'image/png'})
       .then((savedPicture) => {
         message.picture = savedPicture.downloadURL;
-        chatsRef.push(message);
+        roomsRef.push(message);
       });
     }
   }
-  // remove a chat from the list
+  // remove a room from the list
   removeMessage(userId, otherId: string, messageId: string): void {
-    //chats list 
-    this.db.list(`/chats/${userId},${otherId}/messages`).remove(messageId);
+    //rooms list 
+    this.db.list(`/rooms/${userId},${otherId}/messages`).remove(messageId);
   }
 }

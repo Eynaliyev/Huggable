@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {WelcomePage} from "../welcome/welcome";
-import { AuthProvider } from '../../providers/auth-provider';
+import { AuthService } from '../../services/auth-service';
 
 /*
   Generated class for the LoginPage page.
@@ -16,11 +16,11 @@ import { AuthProvider } from '../../providers/auth-provider';
 export class SettingPage {
 
   constructor(public nav: NavController,
-    public authProvider: AuthProvider) {}
+    public authService: AuthService) {}
   
   // logout
   logout() {
-    this.authProvider.logoutUser()
+    this.authService.logoutUser()
     .then(() => this.nav.setRoot(WelcomePage));
   }
 }
