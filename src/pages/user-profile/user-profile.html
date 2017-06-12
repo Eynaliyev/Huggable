@@ -26,21 +26,50 @@
   <button class="">
     Edit Info
   </button>
+  <!--user info-->
   <!--image slide-->
   <div class="rlt">
     <ion-slides pager>
-    <!--
       <ion-slide *ngFor="let image of user.images">
         <img src="{{ image }}" alt="">
       </ion-slide>
-  -->
-     <ion-slide >
-        <img class="image" [src]="user.photoUrl" alt="">
-      </ion-slide>
     </ion-slides>
-
   </div>
+
   <!--user info-->
+  <div padding>
+    <h2>{{ user.name }}, {{ user.age }}</h2>
+    <div>
+      <ion-icon name="pin" color="dark"></ion-icon>
+      {{ user.distance }}km
+    </div>
+    <div padding-top class="profile">
+      <span class="bold">Profile</span>
+      <div>
+        <span class="label">City:</span>
+        {{ user.state }}
+      </div>
+      <div>
+        <span class="label">Zodiac:</span>
+        {{ user.zodiac }}
+      </div>
+      <div>
+        <span class="label">Job:</span>
+        {{ user.job }}
+      </div>
+      <div>
+        <span class="label">Relationship:</span>
+        {{ user.relationship }}
+      </div>
+    </div>
+
+    <div margin-top>
+      <span class="bold">About</span>
+      <br>
+      <span>{{ user.about }}</span>
+    </div>
+  </div>
+  <button ion-button color="danger" (click)="logout()">Log out</button>
 
 </ion-content>
 <!--

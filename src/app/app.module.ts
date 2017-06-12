@@ -21,6 +21,7 @@ import {RoomDetailPage} from '../pages/room-detail/room-detail';
 import {WaitlistPage} from '../pages/waitlist/waitlist';
 import {RoomDiscoverySettingsPage} from '../pages/room-discovery-settings/room-discovery-settings';
 import {SettingPage} from '../pages/setting/setting';
+import {VIPPage} from '../pages/vip/vip';
 import { LoaderComponent } from '../shared/loader.component'
 // end import pages
 
@@ -50,6 +51,7 @@ export const firebaseConfig = {
     RoomDetailPage,
     RoomDiscoverySettingsPage,
     WaitlistPage,
+    VIPPage,
     LoaderComponent
     /* import pages */
   ],
@@ -87,6 +89,7 @@ export const firebaseConfig = {
     SettingPage,
     RoomDiscoverySettingsPage,
     WaitlistPage,
+    VIPPage,
     UserProfilePage
     /* import pages */
   ],

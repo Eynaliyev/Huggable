@@ -8,17 +8,11 @@ import firebase from 'firebase';
 // import pages
 import {MainTabsPage} from '../pages/main-tabs/main-tabs';
 import {WelcomePage} from '../pages/welcome/welcome';
-import {SettingPage} from '../pages/setting/setting';
-import {ContactsPage} from "../pages/contacts/contacts";
-import {UserProfilePage} from '../pages/user-profile/user-profile';
 import { User } from '../shared/user.model';
 // end import pages
 
 @Component({
   templateUrl: 'app.html',
-  queries: {
-    nav: new ViewChild('content')
-  }
 })
 export class MyApp {
 
@@ -26,36 +20,6 @@ export class MyApp {
   zone:NgZone;
   private user: User;
 
-  public nav: any;
-
-  public pages = [
-
-    {
-      title: 'Home',
-      icon: 'ios-home-outline',
-      count: 0,
-      component: MainTabsPage
-    },
-    {
-      title: 'Contacts',
-      icon: 'ion-ios-people',
-      count: 0,
-      component: ContactsPage
-    },
-    {
-      title: 'Profile',
-      icon: 'ion-android-person',
-      count: 0,
-      component: UserProfilePage
-    },
-    {
-      title: 'Setting',
-      icon: 'ios-home-outline',
-      count: 0,
-      component: SettingPage
-    },
-    // import menu
-  ];
 
   constructor(public platform: Platform,
     public authService: AuthService,
@@ -80,15 +44,5 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
     });
-  }
-
-  openPage(page) {
-    // Reset the content nav to have just this page
-    // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
-  }
-  logout() {
-    this.authService.logoutUser()
-    .then(() => this.nav.setRoot(WelcomePage));
   }
 }

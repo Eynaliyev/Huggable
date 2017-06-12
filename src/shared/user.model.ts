@@ -15,7 +15,12 @@ export class User {
     public provider: string, 
     public age?: number,
     public images?: Array<string>,
-    public about?: string,
-    public contacts?: Contact[]
+    public contacts?: Contact[],
+    public distance?: number,
+    public city?: string,
+    public zodiac?: string,
+    public job?: string,
+    public relationshipStatus?: string,
+    public about?: string
   ) {  }
 }

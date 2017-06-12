@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import {VIPPage} from '../vip/vip';
 /**
  * Generated class for the WaitlistPage page.
  *
@@ -14,7 +14,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class WaitlistPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, 
+  	public navParams: NavParams, 
+    public app: App) {
   }
   private numberInFront: number = 5;
   private numberBehind: number = 15;
@@ -23,6 +25,6 @@ export class WaitlistPage {
     console.log('ionViewDidLoad WaitlistPage');
   }
   viewVIP(){
-
+    this.navCtrl.push(VIPPage);
   }
 }
