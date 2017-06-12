@@ -2,7 +2,6 @@ import {Component} from '@angular/core';
 import {NavController, App} from 'ionic-angular';
 import {UserService} from "../../services/user-service";
 import {ChatDetailPage} from "../chat-detail/chat-detail";
-import {NotificationsPage} from "../notifications/notifications";
 import { UtilService } from "../../services/util-service";
 import { Contact } from '../../shared/user.model';
 
@@ -44,9 +43,7 @@ export class ContactsPage {
       this.app.getRootNav().push(ChatDetailPage, params);
     });
   }
+  invite(){
 
-  // view notifications
-  viewNotifications() {
-    this.navCtrl.push(NotificationsPage);
   }
 }

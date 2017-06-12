@@ -11,14 +11,15 @@ import { AppProviders } from './app.providers';
 import {MainTabsPage} from '../pages/main-tabs/main-tabs';
 import {WelcomePage} from '../pages/welcome/welcome';
 import {ContactsPage} from '../pages/contacts/contacts';
-import {MeetPage} from '../pages/meet/meet';
+import {FindRoomPage} from '../pages/find-room/find-room';
 import {FilterPage} from '../pages/filter/filter';
 import {NotificationsPage} from '../pages/notifications/notifications';
 import {UserProfilePage} from '../pages/user-profile/user-profile';
 import {UserDetailPage} from '../pages/user-detail/user-detail';
 import {ChatDetailPage} from '../pages/chat-detail/chat-detail';
 import {RoomDetailPage} from '../pages/room-detail/room-detail';
-import {DatePage} from '../pages/date/date';
+import {WaitlistPage} from '../pages/waitlist/waitlist';
+import {RoomDiscoverySettingsPage} from '../pages/room-discovery-settings/room-discovery-settings';
 import {SettingPage} from '../pages/setting/setting';
 import { LoaderComponent } from '../shared/loader.component'
 // end import pages
@@ -39,15 +40,16 @@ export const firebaseConfig = {
     MainTabsPage,
     WelcomePage,
     ContactsPage,
-    MeetPage,
+    FindRoomPage,
     FilterPage,
     NotificationsPage,
     UserDetailPage,
     ChatDetailPage,
-    DatePage,
     SettingPage,
     UserProfilePage,
     RoomDetailPage,
+    RoomDiscoverySettingsPage,
+    WaitlistPage,
     LoaderComponent
     /* import pages */
   ],
@@ -77,13 +79,14 @@ export const firebaseConfig = {
     MainTabsPage,
     WelcomePage,
     ContactsPage,
-    MeetPage,
+    FindRoomPage,
     FilterPage,
     NotificationsPage,
     UserDetailPage,
     ChatDetailPage,
-    DatePage,
     SettingPage,
+    RoomDiscoverySettingsPage,
+    WaitlistPage,
     UserProfilePage
     /* import pages */
   ],

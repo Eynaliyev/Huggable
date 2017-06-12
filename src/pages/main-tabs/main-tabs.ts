@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {NavController, Platform, MenuController} from 'ionic-angular';
 import {ContactsPage} from "../contacts/contacts";
-import {MeetPage} from "../meet/meet";
-
+import { UserProfilePage } from "../user-profile/user-profile";
+import {FindRoomPage} from '../find-room/find-room';
 /*
  Generated class for the LoginPage page.
 
@@ -15,20 +15,18 @@ import {MeetPage} from "../meet/meet";
 })
 export class MainTabsPage {
   // tabs
-  public nearby: any;
-  public match: any;
+  public userProfile: any;
   public contacts: any;
-  public meet: any;
-  public wall: any;
-
+  public randomChat: any;
   // tab color
   public tabColor = 'primary';
 
   constructor(public nav: NavController, public platform: Platform, public menu: MenuController) {
+    console.log('Main tabs page initiated');
     // set component for tabs
     this.contacts = ContactsPage;
-    this.meet = MeetPage;
-
+    this.userProfile = UserProfilePage;
+    this.randomChat = FindRoomPage;
     // disable menu
     this.menu.swipeEnable(false);
 

@@ -1,0 +1,25 @@
+page-waitlist {
+	h1 { 
+	  text-align:center;
+	  font-size: 44px;
+	  font-color: "#4EADC5";
+	  border: 1px;
+	  text-shadow: -1px 0 1px white, 0 1px 1px white, 1px 0 1px white, 0 -1px 1px white
+	}
+
+	.background {
+	    position: fixed;
+	    top: 50%;
+	    left: 50%;
+	    min-width: 100%;
+	    min-height: 100%;
+	    width: auto;
+	    height: auto;
+	    z-index: -100;
+	    transform: translateX(-50%) translateY(-50%);
+	    background: url('../assets/img/field-bckg.png') no-repeat;
+	    background-size: cover;
+	    transition: 1s opacity;
+	}
+
+}

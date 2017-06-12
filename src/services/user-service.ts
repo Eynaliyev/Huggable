@@ -9,7 +9,6 @@ export class UserService {
 
   private contacts: FirebaseListObservable<any[]>;
   private currentUser: User;
-  private users: FirebaseListObservable<User[]>;
   private user: User = JSON.parse(localStorage.getItem('currentUser'));
 
   constructor(public db: AngularFireDatabase) {}
