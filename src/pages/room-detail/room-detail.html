@@ -11,6 +11,11 @@
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Random Chat</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="viewSettings()">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -50,7 +55,25 @@
         <div class="message-detail">
           <span class="message-time">{{ message.time }}</span>
         </div>
-
+        <ion-grid class="action-btn">
+          <ion-row>
+            <ion-col text-center>
+              <button ion-button color="white" margin-right (click)="like()">
+                <ion-icon name='heart' color="danger"></ion-icon>
+              </button>    
+            </ion-col>
+            <ion-col>
+              <button ion-button color="white" margin-right (click)="dislike()">
+                <ion-icon name='close' color="danger"></ion-icon>
+              </button>
+            </ion-col>
+            <ion-col>
+              <button ion-button color="white" margin-right (click)="viewProfile(message.from)">
+                <ion-icon name='person' color="danger"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>    
       </div>
 
     </div>

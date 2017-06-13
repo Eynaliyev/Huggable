@@ -1,32 +1,29 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserService } from '../../services/user-service';
-import { AuthService } from '../../services/auth-service';
 import { User } from '../../shared/user.model';
-import { WelcomePage } from '../welcome/welcome';
-import { EditProfilePage } from '../edit-profile/edit-profile';
+
 /**
- * Generated class for the UserProfile page.
+ * Generated class for the EditProfilePage page.
  *
  * See http://ionicframework.com/docs/components/#navigation for more info
  * on Ionic pages and navigation.
  */
 @IonicPage()
 @Component({
-  selector: 'page-user-profile',
-  templateUrl: 'user-profile.html',
+  selector: 'page-edit-profile',
+  templateUrl: 'edit-profile.html',
 })
-export class UserProfilePage {
+export class EditProfilePage {
   user: User;
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    private userService: UserService,
-    private authService: AuthService) {
+  constructor(public navCtrl: NavController, 
+  	public navParams: NavParams,
+  	public userService: UserService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UserProfile');
+    console.log('ionViewDidLoad EditProfilePage');
     this.userService.getUid().then(uid => {
       this.userService.getUserProfile(uid)
       .subscribe(user => {
@@ -46,11 +43,8 @@ export class UserProfilePage {
     this.user.about = "I'm a creator";
     this.user.images.push(this.user.photoUrl);
   }
-  editProfile(){
-    this.navCtrl.push(EditProfilePage);
+  //update data in the backend
+  save(){
   }
-  logout() {
-    this.authService.logoutUser()
-    .then(() => this.navCtrl.setRoot(WelcomePage));
-  }
+
 }

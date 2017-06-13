@@ -1,6 +1,5 @@
 import {Component, NgZone} from '@angular/core';
 import {Platform} from 'ionic-angular';
-import {ViewChild} from '@angular/core';
 import {StatusBar} from 'ionic-native';
 import {AuthService} from '../services/auth-service';
 import {UserService} from '../services/user-service';

@@ -14,5 +14,44 @@
 
 
 <ion-content padding>
-	<h1>VIP</h1>
+	<h2>Skip the line!</h2>
+	<h3>two ways to skip the line</h3>
+	<h4>1. invite a friend - and you both become VIP for a week for FREE</h4>
+    <button ion-button block margin-bottom color="fb-color" (click)="invite()">Invite a friend</button>
+	<h4>2. - purchase VIP - starting from $0.99 a month</h4>
+    <ion-grid class="action-btn">
+      <ion-row>
+        <ion-col text-center>
+          <button ion-button color="white" margin-right (click)="select('monthly')">
+            <ion-icon name='ios-heart' color="danger"></ion-icon>
+          </button>    
+        </ion-col>
+        <ion-col>
+          <button ion-button color="white" margin-right (click)="select('half-year')">
+            <ion-icon name='ios-heart' color="danger"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button color="white" margin-right (click)="select('yearly')">
+            <ion-icon name='ios-heart' color="danger"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center>
+            <h4>1 month - </h4>
+            <h3>$9.99/month</h3>        
+        </ion-col>
+        <ion-col>
+            <h4>6 months - </h4>
+            <h3>$1.29/month</h3>
+        </ion-col>
+        <ion-col>
+            <h4>12 months - </h4>
+            <h3>$0.99/month</h3>
+        </ion-col>
+      </ion-row>
+    </ion-grid>    
+    <button ion-button block color="secondary" (click)="buyVIP()">Purchase VIP</button>
+
 </ion-content>
