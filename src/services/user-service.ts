@@ -12,7 +12,9 @@ export class UserService {
   private user: User = JSON.parse(localStorage.getItem('currentUser'));
 
   constructor(public db: AngularFireDatabase) {}
-
+  inviteFriend(){
+    
+  }
   getUid(): Promise<string>{
     let res = new Promise<any>((resolve, reject) => {
         console.log('uid in getUid(): ', JSON.parse(localStorage.getItem('currentUser')).uid);
@@ -51,6 +53,9 @@ export class UserService {
         pictureRef.set(image);
       });
     });
+  }
+  updateProfile(user){
+
   }
   //set current user depending on whether there's somebody like this, or create a new one
   //check for presence of dummy data with arguments

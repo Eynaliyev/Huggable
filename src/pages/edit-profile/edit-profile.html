@@ -32,15 +32,11 @@
       <span><input [(ngModel)]="user.about"></span>
     </div>
     <h2>{{ user.name }}, {{ user.age }}</h2>
-    <div>
-      <ion-icon name="pin" color="dark"></ion-icon>
-      {{ user.distance }}km
-    </div>
     <div padding-top class="profile">
       <span class="bold">Profile</span>
       <div>
         <span class="label">City:</span>
-        {{ user.state }}
+        {{ user.city }}
       </div>
       <div>
         <span class="label">Zodiac:</span>
@@ -52,7 +48,7 @@
       </div>
       <div>
         <span class="label">Relationship:</span>
-        {{ user.relationship }}
+        {{ user.relationshipStatus }}
       </div>
     </div>
   </div>

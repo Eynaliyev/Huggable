@@ -28,23 +28,12 @@ export class EditProfilePage {
       this.userService.getUserProfile(uid)
       .subscribe(user => {
         this.user = user;
-        this.addTestData();
       });
     });
   }
-  addTestData(){
-    this.user.age = 25;
-    this.user.distance = 15;
-    this.user.images = [];
-    this.user.city = 'Baku';
-    this.user.zodiac = 'Cancer';
-    this.user.job = 'DPI Creative Agency';
-    this.user.relationshipStatus = 'single';
-    this.user.about = "I'm a creator";
-    this.user.images.push(this.user.photoUrl);
-  }
   //update data in the backend
   save(){
+    this.userService.updateProfile(this.user);
   }
 
 }

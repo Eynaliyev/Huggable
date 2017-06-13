@@ -19,6 +19,10 @@ export class RoomService {
     let roomRef = this.db.object(`/rooms/${uid},${id}`);
     return roomRef;
   }
+  findRoom():Promise<any>{
+    let res = new Promise<any>((resolve, reject) => resolve());
+    return res;
+  }
   getMessages(uid: string, id: string): FirebaseListObservable<any> {
     let messagesRef = this.db.list(`/rooms/${uid},${id}/messages`);
     return messagesRef;

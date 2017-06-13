@@ -31,20 +31,9 @@ export class UserProfilePage {
       this.userService.getUserProfile(uid)
       .subscribe(user => {
         this.user = user;
-        this.addTestData();
+        console.log('this user in user.profile: ', this.user);
       });
     });
-  }
-  addTestData(){
-    this.user.age = 25;
-    this.user.distance = 15;
-    this.user.images = [];
-    this.user.city = 'Baku';
-    this.user.zodiac = 'Cancer';
-    this.user.job = 'DPI Creative Agency';
-    this.user.relationshipStatus = 'single';
-    this.user.about = "I'm a creator";
-    this.user.images.push(this.user.photoUrl);
   }
   editProfile(){
     this.navCtrl.push(EditProfilePage);

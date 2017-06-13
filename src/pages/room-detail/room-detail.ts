@@ -8,7 +8,7 @@ import { User } from '../../shared/user.model';
 import { UtilService } from '../../services/util-service';
 import { Camera } from '@ionic-native/camera';
 import { Room } from '../../shared/room.model';
-
+import { RoomSettingsPage } from '../room-settings/room-settings';
 /*
  Generated class for the LoginPage page.
 
@@ -117,5 +117,8 @@ export class RoomDetailPage {
     }, 200)
     // resetting picture variable to null
     this.guestPicture = null;
+  }
+  viewSettings(){
+    this.nav.push(RoomSettingsPage);
   }
 }

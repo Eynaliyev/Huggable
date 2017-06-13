@@ -4,7 +4,8 @@ import {NavController, App} from 'ionic-angular';
 import {UserDetailPage} from "../user-detail/user-detail";
 import { RoomDiscoverySettingsPage } from '../room-discovery-settings/room-discovery-settings';
 import { WaitlistPage } from '../waitlist/waitlist';
-
+import { RoomService } from '../../services/room-service';
+import { Room } from '../../shared/room.model';
 /*
   Generated class for the LoginPage page.
 
@@ -17,17 +18,21 @@ import { WaitlistPage } from '../waitlist/waitlist';
 })
 export class FindRoomPage {
   public dates: any;
+  public room: Room;
 
   constructor(public nav: NavController, 
-    //public dateService: DateService, 
+    public roomService: RoomService, 
     public app: App) {
-    // set sample data
-    //this.dates = dateService.getAll();
   }
   findRandomChat(){
     //search for chatroom
     // while searching open waitlist modal
     this.openWaitlist();
+    this.roomService.findRoom()
+    .then(room => {
+      this.room = room;
+      this.closeWaitlist();
+    })
     //when found a room close the modal
   }
 
@@ -41,5 +46,8 @@ export class FindRoomPage {
   }
   openWaitlist() {
     this.app.getRootNav().push(WaitlistPage);
+  }
+  closeWaitlist(){
+    this.app.getRootNav().pop();
   }
 }
