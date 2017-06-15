@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { UserService } from '../../services/user-service';
 import { RoomService } from '../../services/room-service';
+import { Room } from '../../shared/room.model';
+import { WaitlistPage } from '../waitlist/waitlist';
+
 /**
  * Generated class for the RoomSettings page.
  *
@@ -14,11 +17,13 @@ import { RoomService } from '../../services/room-service';
   templateUrl: 'room-settings.html',
 })
 export class RoomSettingsPage {
+  public room: Room;
 
   constructor(public navCtrl: NavController, 
   	public navParams: NavParams,
   	private userService: UserService,
-  	private roomService: RoomService) {
+  	private roomService: RoomService, 
+    public app: App) {
   }
 
   ionViewDidLoad() {
@@ -28,7 +33,18 @@ export class RoomSettingsPage {
   	this.userService.inviteFriend();
   }
   changeRoom(){
-  	this.roomService.findRoom();
+  	this.roomService.leaveRoom();
+    this.openWaitlist();
+    this.roomService.findRoom()
+    .then(room => {
+      this.room = room;
+      this.closeWaitlist();
+    })
   }
-
+  openWaitlist() {
+    this.app.getRootNav().push(WaitlistPage);
+  }
+  closeWaitlist(){
+    this.app.getRootNav().pop();
+  }
 }

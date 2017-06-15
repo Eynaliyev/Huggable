@@ -28,11 +28,11 @@ export class FindRoomPage {
     //search for chatroom
     // while searching open waitlist modal
     this.openWaitlist();
-    this.roomService.findRoom()
-    .then(room => {
-      this.room = room;
-      this.closeWaitlist();
-    })
+    // this.roomService.findRoom()
+    // .then(room => {
+    //   this.room = room;
+    //   this.closeWaitlist();
+    // })
     //when found a room close the modal
   }
 

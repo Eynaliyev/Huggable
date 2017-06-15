@@ -1,3 +1,8 @@
+@import "tinder.sass";
+@import "button.css";
+@import "loader.css";
+@import "chat.sass";
+@import "helper.sass";
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/v2/theming/
 @import "ionic.globals";
@@ -24,10 +29,10 @@ $background-color:  #fff;
 
 $colors: (
   primary: #4EADC5,
-  secondary: #32db64,
-  danger: #D95560,
+  secondary: #88d8b0,
+  danger: #ff6f6a,
   light: #f4f4f4,
-  energized: #ffc900,
+  energized: #ffcc5c,
   dark: #6D6D6D,
   favorite: #69BB7B,
   border-color: #E0E0E0,

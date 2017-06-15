@@ -10,10 +10,10 @@ import { AuthService } from '../../services/auth-service';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-setting',
-  templateUrl: 'setting.html',
+  selector: 'page-settings',
+  templateUrl: 'settings.html',
 })
-export class SettingPage {
+export class SettingsPage {
 
   constructor(public nav: NavController,
     public authService: AuthService) {}

@@ -1,7 +1,7 @@
 {
-  "name": "Huggable",
+  "name": "FlyChats",
   "author": "Rustam Eynaliyev",
-  "homepage": "http://huggableapp.com/",
+  "homepage": "http://huggaFlyChats.com/",
   "private": true,
   "scripts": {
     "ionic:build": "ionic-app-scripts build",

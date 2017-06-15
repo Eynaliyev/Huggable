@@ -20,20 +20,21 @@ import {ChatDetailPage} from '../pages/chat-detail/chat-detail';
 import {RoomDetailPage} from '../pages/room-detail/room-detail';
 import {WaitlistPage} from '../pages/waitlist/waitlist';
 import {RoomDiscoverySettingsPage} from '../pages/room-discovery-settings/room-discovery-settings';
-import {SettingPage} from '../pages/setting/setting';
+import {SettingsPage} from '../pages/settings/settings';
 import {VIPPage} from '../pages/vip/vip';
 import {EditProfilePage} from '../pages/edit-profile/edit-profile';
+import { PurchaseVipPage } from '../pages/purchase-vip/purchase-vip';
 import { LoaderComponent } from '../shared/loader.component'
 // end import pages
 
 // AF2 Settings
 export const firebaseConfig = {
-  apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
-  authDomain: "huggable-9e981.firebaseapp.com",
-  databaseURL: "https://huggable-9e981.firebaseio.com",
-  projectId: "huggable-9e981",
-  storageBucket: "huggable-9e981.appspot.com",
-  messagingSenderId: "272489685620"
+    apiKey: "AIzaSyDI22hmtv2clf3WYdo2y04z_h-eCfbv_F4",
+    authDomain: "huggable-9e981.firebaseapp.com",
+    databaseURL: "https://huggable-9e981.firebaseio.com",
+    projectId: "huggable-9e981",
+    storageBucket: "huggable-9e981.appspot.com",
+    messagingSenderId: "272489685620"
 };
 
 @NgModule({
@@ -47,13 +48,14 @@ export const firebaseConfig = {
     NotificationsPage,
     UserDetailPage,
     ChatDetailPage,
-    SettingPage,
+    SettingsPage,
     UserProfilePage,
     RoomDetailPage,
     RoomDiscoverySettingsPage,
     WaitlistPage,
     VIPPage,
     EditProfilePage,
+    PurchaseVipPage,
     LoaderComponent
     /* import pages */
   ],
@@ -88,12 +90,13 @@ export const firebaseConfig = {
     NotificationsPage,
     UserDetailPage,
     ChatDetailPage,
-    SettingPage,
+    SettingsPage,
     RoomDiscoverySettingsPage,
     WaitlistPage,
     VIPPage,
     EditProfilePage,
-    UserProfilePage
+    UserProfilePage,
+    PurchaseVipPage,
     /* import pages */
   ],
   providers: AppProviders.getProviders()

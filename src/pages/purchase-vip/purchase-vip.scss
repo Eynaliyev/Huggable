@@ -1,0 +1,13 @@
+page-purchase-vip {
+	.plan {
+		color: primary;
+		border-racius: 1;
+	}
+	.plan.active {
+		color: blue;
+	}
+	.header-img {
+		width: 100%;
+		height: 30%;
+	}
+}

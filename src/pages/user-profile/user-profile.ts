@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { UserService } from '../../services/user-service';
 import { AuthService } from '../../services/auth-service';
 import { User } from '../../shared/user.model';
 import { WelcomePage } from '../welcome/welcome';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { SettingsPage} from '../settings/settings';
 /**
  * Generated class for the UserProfile page.
  *
@@ -22,7 +23,8 @@ export class UserProfilePage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     private userService: UserService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private app: App) {
   }
 
   ionViewDidLoad() {
@@ -38,8 +40,11 @@ export class UserProfilePage {
   editProfile(){
     this.navCtrl.push(EditProfilePage);
   }
+  viewSettings(){
+    this.navCtrl.push(SettingsPage);
+  }
   logout() {
     this.authService.logoutUser()
-    .then(() => this.navCtrl.setRoot(WelcomePage));
+    .then(() => this.app.getRootNav().setRoot(WelcomePage));
   }
 }

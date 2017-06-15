@@ -35,5 +35,4 @@ export class EditProfilePage {
   save(){
     this.userService.updateProfile(this.user);
   }
-
 }
