@@ -45,43 +45,43 @@
 
   <!--user info-->
   <div padding>
-    <h2>{{ user.name }}, {{ user.age }}</h2>
+    <h2>{{ user?.name }}, {{ user?.age }}</h2>
     <div>
       <ion-icon name="pin" color="dark"></ion-icon>
-      {{ user.distance }}km
+      {{ user?.distance }}km
     </div>
     <div padding-top class="profile">
       <span class="bold">Profile</span>
       <div>
         <span class="label">Height:</span>
-        {{ user.height }}cm
+        {{ user?.height }}cm
       </div>
       <div>
         <span class="label">Weight:</span>
-        {{ user.weight }}kg
+        {{ user?.weight }}kg
       </div>
       <div>
         <span class="label">City:</span>
-        {{ user.state }}
+        {{ user?.state }}
       </div>
       <div>
         <span class="label">Zodiac:</span>
-        {{ user.zodiac }}
+        {{ user?.zodiac }}
       </div>
       <div>
         <span class="label">Job:</span>
-        {{ user.job }}
+        {{ user?.job }}
       </div>
       <div>
         <span class="label">Relationship:</span>
-        {{ user.relationship }}
+        {{ user?.relationship }}
       </div>
     </div>
 
     <div margin-top>
       <span class="bold">About</span>
       <br>
-      <span>{{ user.about }}</span>
+      <span>{{ user?.about }}</span>
     </div>
 
     <button ion-button block margin-top color="dark">REPORT OR BLOCK</button>
